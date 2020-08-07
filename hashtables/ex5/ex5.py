@@ -6,7 +6,23 @@ def finder(files, queries):
     """
     YOUR CODE HERE
     """
-    # Your code here
+    result = []
+    cache = {}
+
+    for path in files:
+        filename = path.rsplit('/',1)[1]
+        try:
+            cache[filename]
+        except KeyError:
+            cache[filename] = []
+        finally:
+            cache[filename].append(path)
+
+    for query in queries:
+        try:
+            result.extend(cache[query])
+        except KeyError:
+            continue
 
     return result
 
